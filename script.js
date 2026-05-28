@@ -52,16 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1500); // Wait for fade out
     });
 
-    let isMapperMode = false;
-
     // Hotspot click handling
     hotspots.forEach(hotspot => {
         hotspot.addEventListener("click", () => {
-            if (isMapperMode) return; // Guard! Prevent opening dialogue when dragging in Mapper Mode
             const sceneIndex = parseInt(hotspot.getAttribute("data-scene"));
             openModal(sceneIndex);
         });
-        makeDraggable(hotspot); // Restores coordinate calibration drag binding
     });
 
     // Close Modal
@@ -581,56 +577,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // Trigger the Vesak light loop at 100ms interval
     setInterval(tickVesakLights, 100);
 
-    // --- CALIBRATION MAPPER TOOL ---
-    const toggleMapperBtn = document.getElementById("toggle-mapper");
-    const saveMapperBtn = document.getElementById("save-mapper");
-
-    toggleMapperBtn.addEventListener("click", () => {
-        isMapperMode = !isMapperMode;
-        if (isMapperMode) {
-            toggleMapperBtn.textContent = "Disable Mapper";
-            saveMapperBtn.style.display = "inline-block";
-            hotspots.forEach(h => h.classList.add("draggable"));
-        } else {
-            toggleMapperBtn.textContent = "මාපර් ටූල් (Mapper Tool)";
-            saveMapperBtn.style.display = "none";
-            hotspots.forEach(h => h.classList.remove("draggable"));
-        }
-    });
-
-    function makeDraggable(el) {
-        let isDragging = false;
-        let container = document.querySelector(".thorana-container");
-
-        el.addEventListener("mousedown", (e) => {
-            if (!isMapperMode) return;
-            isDragging = true;
-            e.stopPropagation();
-        });
-
-        document.addEventListener("mousemove", (e) => {
-            if (!isDragging) return;
-            const rect = container.getBoundingClientRect();
-            let x = ((e.clientX - rect.left) / rect.width) * 100;
-            let y = ((e.clientY - rect.top) / rect.height) * 100;
-            
-            x = Math.max(0, Math.min(100, x));
-            y = Math.max(0, Math.min(100, y));
-            
-            el.style.left = `${x.toFixed(1)}%`;
-            el.style.top = `${y.toFixed(1)}%`;
-        });
-
-        document.addEventListener("mouseup", () => {
-            isDragging = false;
-        });
-    }
-
-    saveMapperBtn.addEventListener("click", () => {
-        let results = "Please copy these coordinates to the chat:\n\n";
-        hotspots.forEach((h, i) => {
-            results += `Scene ${i+1}: top: ${h.style.top}; left: ${h.style.left};\n`;
-        });
-        alert(results);
-    });
 });

@@ -10,8 +10,8 @@
 </head>
 <body>
     <!-- Background Audio -->
-    <audio id="bg-audio" loop preload="auto">
-        <source src="music.wav" type="audio/wav">
+    <audio id="bg-audio" loop preload="none">
+        <source src="music.m4a" type="audio/mp4">
     </audio>
 
     <!-- Entrance Screen -->
@@ -75,12 +75,6 @@
                 <p id="dialogue-text" class="karaoke-text"></p>
             </div>
         </div>
-    </div>
-
-    <!-- Mapper Controls -->
-    <div id="mapper-controls" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 10px; border: 1px solid #00e5ff; display: flex; gap: 10px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);">
-        <button id="toggle-mapper" class="glow-btn" style="font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 5px;">මාපර් ටූල් (Mapper Tool)</button>
-        <button id="save-mapper" class="glow-btn" style="font-size: 0.9rem; padding: 0.5rem 1rem; display: none; border-radius: 5px;">Save Coordinates</button>
     </div>
 
     <script src="script.js"></script>
