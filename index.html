@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>අංගුලිමාල දමනය - පූර්ණ විද්‍යුත් තොරණ</title>
+    <meta name="description" content="A high-fidelity interactive web-based Digital Thorana experience exploring the story of Angulimala.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600;800&family=Inter:wght@400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Audio -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="music.wav" type="audio/wav">
+    </audio>
+
+    <!-- Entrance Screen -->
+    <div id="entrance-screen" class="screen active">
+        <div class="entrance-content">
+            <h1 style="font-family: 'Abhaya Libre', serif;">අංගුලිමාල දමනය</h1>
+            <h2 style="font-family: 'Abhaya Libre', serif;">පූර්ණ විද්‍යුත් තොරණ</h2>
+            <button id="start-btn" class="glow-btn" style="font-family: 'Abhaya Libre', serif;">තොරණ නරඹන්න</button>
+        </div>
+    </div>
+
+    <!-- Main Thorana Screen -->
+    <div id="main-screen" class="screen">
+        <!-- Background Sky Layer (Clouds) -->
+        <div id="clouds-container">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+            <div class="cloud cloud-4"></div>
+        </div>
+
+        <!-- Fireworks Canvas (Behind Thorana) -->
+        <canvas id="fireworks-canvas"></canvas>
+
+        <div class="thorana-container">
+            <img src="thorana.jpg" alt="Vesak Thorana" id="thorana-image">
+            <!-- Light Flow SVG -->
+            <svg class="light-flow" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00e5ff" />
+                        <stop offset="50%" stop-color="#ff0055" />
+                        <stop offset="100%" stop-color="#ffd700" />
+                    </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="100" height="100" class="neon-border" rx="2" ry="2"/>
+            </svg>
+            
+            <!-- Buddha Aura -->
+            <div id="buddha-aura"></div>
+            
+            <!-- Hotspots -->
+            <div class="hotspot" data-scene="0" style="top: 32.1%; left: 33.6%;"></div>
+            <div class="hotspot" data-scene="1" style="top: 19.4%; left: 50.2%;"></div>
+            <div class="hotspot" data-scene="2" style="top: 31.9%; left: 67.2%;"></div>
+            <div class="hotspot" data-scene="3" style="top: 55.9%; left: 27.4%;"></div>
+            <div class="hotspot" data-scene="4" style="top: 55.8%; left: 72.8%;"></div>
+        </div>
+    </div>
+
+    <!-- Story Modal -->
+    <div id="story-modal" class="modal hidden">
+        <div class="modal-content">
+            <button id="close-modal" class="close-btn">&times;</button>
+            <div id="modal-visual-container">
+                <img id="modal-image" src="thorana.jpg" alt="Scene Details">
+            </div>
+            <h3 id="scene-title"></h3>
+            <div class="dialogue-container">
+                <span id="speaker-name" class="speaker"></span>
+                <p id="dialogue-text" class="karaoke-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mapper Controls -->
+    <div id="mapper-controls" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(0,0,0,0.85); padding: 15px; border-radius: 10px; border: 1px solid #00e5ff; display: flex; gap: 10px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);">
+        <button id="toggle-mapper" class="glow-btn" style="font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 5px;">මාපර් ටූල් (Mapper Tool)</button>
+        <button id="save-mapper" class="glow-btn" style="font-size: 0.9rem; padding: 0.5rem 1rem; display: none; border-radius: 5px;">Save Coordinates</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
